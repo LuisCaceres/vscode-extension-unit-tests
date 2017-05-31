@@ -14,7 +14,21 @@
         "*"
     ],
     "main": "./extension",
-    "contributes": {},
+    "contributes": {
+        "commands": [
+            {
+                "command": "unit-tests.insertUnitTestFile",
+                "title": "Insert Unit Test File"
+            }
+        ],
+        "menus": {
+            "explorer/context": [{
+                "when": "explorerResourceIsFolder",
+                "command": "unit-tests.insertUnitTestFile",
+                "group": "navigation"
+            }]
+        }
+    },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
