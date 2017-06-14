@@ -1,11 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-require('./src/insert-unit-test-file.js');
-require('./src/read-only-lines.js');
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
-function activate() {}
+function activate() {
+    require('./src/insert-unit-test-file.js');
+    require('./src/read-only-lines.js');
+}
 
 exports.activate = activate;
 
