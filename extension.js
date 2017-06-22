@@ -21,7 +21,8 @@ exports.deactivate = deactivate;
 
 // spec.html files live in specific type of folders. They can't be put anywhere. We need some validation checks for this.
 // on save, the browser(s) running the tests should reload automatically
-// intellisense suppor for the library.
+// intellisense support for the library.
 // only allow modification with the main <script> element
-// populate <title> with the appropriate text
+// populate <title> with the appropriate text DONE
 // get GIFS to demonstrate the features of this extension
+// enable / disable highlighter from this file instead of read-only.js check the deactivate function
