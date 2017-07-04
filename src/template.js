@@ -38,7 +38,9 @@ function clone(subject) {
         (function () {
             'use strict';
             describe('A group of unit tests!', function () {
-                it('Is a unit test!');
+                it('Is a unit test!', function () {
+                    expect('Hello world!').to.be('Hello world!');
+                });
             });
         }());
     </script>
