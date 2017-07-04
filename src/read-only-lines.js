@@ -14,9 +14,24 @@ const decorationHighlight = window.createTextEditorDecorationType({
     backgroundColor: 'rgba(255, 128, 128, 1)' // This colour is sort of pinkish.
 });
 
-// Indicate which lines in the document are read-only.
+// Indicate which lines in a unit test file are read-only.
 const TOP_LINES = 20; // First 20 lines.
 const BOTTOM_LINES = 8; // Last 8 lines.
+
+// Will store a reference to the highlighter.
+let disposable = null;
+
+// Get a reference to the active text editor if any.
+const { activeTextEditor } = window;
+
+// If there is an active text editor.
+if (activeTextEditor) {
+    // Check if the document in the active text editor is a unit test file.
+    enableHighlighterIfRequired(activeTextEditor);
+}
+
+// From now on, check if whatever becomes the active editor contains a unit test file.
+window.onDidChangeActiveTextEditor(enableHighlighterIfRequired);
 
 
 /** Enable the highlighting feature as long as certain conditions are met.
@@ -24,10 +39,14 @@ const BOTTOM_LINES = 8; // Last 8 lines.
  * @listens onDidChangeActiveTextEditor
  */
 function enableHighlighterIfRequired(textEditor){
-    // Disable the highlighter feature that may be on in some other document.
-    disposable.dispose();
+    // If the highlighter is on in another document.
+    if (disposable) {
+        // Turn the highlighter off in that document.
+        disposable.dispose();
+        disposable = null;
+    };
     // Get the file name of the file attached to the active document.
-    const FILE_NAME = path.basename(textEditor.document.uri.fsPath);
+    const FILE_NAME = path.basename(textEditor.document.fileName);
     // If the file name ends with '.spec.html'.
     if (FILE_NAME.endsWith('.spec.html')) {
         // Enable the highlighter feature in the active document.
@@ -98,10 +117,3 @@ function isReadOnly(line) {
     // If the line is one of the first 20 or one of the last 8 it is read-only.
     return LINE_NUMBER < TOP_LINES || LINE_NUMBER >= LINE_COUNT - BOTTOM_LINES;
 }
-
-// Highlight a read-only line if it detects one.
-let disposable = window.onDidChangeTextEditorSelection(highlightIfRequired);
-disposable;
-
-// Enable the highlighting feature as long as certain conditions are met.
-window.onDidChangeActiveTextEditor(enableHighlighterIfRequired);
