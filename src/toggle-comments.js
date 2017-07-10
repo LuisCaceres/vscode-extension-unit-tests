@@ -19,8 +19,8 @@ const decoration = window.createTextEditorDecorationType({
 // Let 'single' be a regular expression that matches a pair of forward slashes followed by one or more characters of any type except for a line feed character followed by any number of white space characters. (single line comment block).
 const single = /\/\/[^\n]+\s+/;
 
-// Let 'multi' be a regular expression that matches a forward slash followed by an asterisk followed by one or more characters of any type except an asterisk that is followed by a forward slash followed by a carriage return character followed by any number of white space characters. (multi line comment block).
-const multi = /\/\*[\w\W]+?\*\/\r\s+/;
+// Let 'multi' be a regular expression that matches a forward slash followed by an asterisk followed by one or more characters of any type except an asterisk followed by a forward slash and optionally followed by a carriage return character followed by any number of white space characters. (multi line comment block).
+const multi = /\/\*[\w\W]+?\*\/(\r\s+)?/;
 
 // Let 'regex' be a regular expression based on 'single' and 'multi'.
 const regex = new RegExp(`${single.source}|${multi.source}`, 'g');
