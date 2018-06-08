@@ -24,8 +24,6 @@ function clone(subject) {
     <script>
         mocha.setup('bdd');
     </script>
-    <!-- loads the event constructors polyfill -->
-    <script src="../polyfills/event constructors.js"></script>
     <!-- loads code to be tested. Add more script tags if necessary -->
     <script src="${subject}.js"></script>
     <style></style>
